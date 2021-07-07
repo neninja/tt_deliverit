@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "deliveritapp"
+    ports:
+      - "15432:5432"
+
+  app:
+    build: docker/php
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    links:
+      - db:db
+    ports:
+      - '8080:80'
+    expose:
+      - '8080'
+    depends_on:
+      - db
