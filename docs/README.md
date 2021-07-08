@@ -1,6 +1,6 @@
 # Endpoints
 
-- [Exemplos](../api.rest)
+- [Exemplos](https://raw.githubusercontent.com/nenitf/teste_deliverit/main/api.rest)
 
 ## Lista corredores
 
