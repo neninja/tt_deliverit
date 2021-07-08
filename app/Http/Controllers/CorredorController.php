@@ -44,13 +44,8 @@ class CorredorController extends Controller
             ->get();
 
         return [
-            'c' => $corredores
+            'data' => $corredores
         ];
-
-
-        return UsuarioResource::collection(
-            $usuarios
-        );
     }
 
     public function store(Request $req)
