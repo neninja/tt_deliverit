@@ -1,22 +1,13 @@
-# com o vim, <c-j> ou o g:vrc_trigger no método http
-# https://github.com/diepm/vim-rest-console.git
-
-# global definitions
-// default host
 http://localhost:8080
-
-// argumentos curl default
--s # silencioso
-#-i # header com syntax dinamica
 --
-
+--
+GET /corredores
+--
+GET /corredores?nome=Felipe2
 --
 POST /corredores
 {
-  "nome": "Felipe",
+  "nome": "Felipe2",
   "cpf": "37128197060",
-  "dataNascimento": "20200507"
+  "dataNascimento": "19800507"
 }
---
-GET /corredores
-
