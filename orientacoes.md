@@ -52,7 +52,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
 
 - [ ] Todos os campos são obrigatórios.
 - [ ] Não é permitido cadastrar o mesmo corredor em duas provas diferentes na mesma data. Por exemplo, o corredor Barry Allen não pode estar cadastrado nas provas de 21km e 42km no dia 05/10/2019.
-- [ ] Não é permitida a inscrição de menores de idade.
+- [x] Não é permitida a inscrição de menores de idade.
 - [ ] As classificações são definidas pelo menor tempo de prova.
 - [ ] A listagem de classificações por idade deve apresentar as posições dos candidatos dentro dos seguintes grupos em cada tipo de prova:
     - 18 – 25 anos

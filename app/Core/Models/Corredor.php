@@ -18,6 +18,11 @@ class Corredor
         string $cpf,
         $dataNascimento
     ) {
+        $diff = (new \DateTime())->diff($dataNascimento);
+        $idade = $diff->y;
+        if($idade < 18)
+            throw new ValidationException("Corredor não pode ser menor de idade", $idade);
+
         $this->id = $id;
         $this->nome = $nome;
         $this->cpf = new CPF($cpf);
