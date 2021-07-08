@@ -2,13 +2,21 @@ version: "3.3"
 
 services:
   db:
+    container_name: db
     image: postgres
     environment:
-      POSTGRES_PASSWORD: "deliveritapp"
+      POSTGRES_DB: teste_deliverit
+      POSTGRES_USER: deliveritun
+      POSTGRES_PASSWORD: deliveritpw
     ports:
-      - "15432:5432"
+      - "5432:5432"
+    expose:
+      - '5432'
+    volumes:
+      - ./docker/psql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   app:
+    container_name: app
     build: docker/php
     volumes:
       - .:/var/www/html

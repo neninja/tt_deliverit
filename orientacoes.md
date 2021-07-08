@@ -5,7 +5,7 @@
 Desenvolver um serviço REST para tratar as regras de negócios descritas abaixo.
 - [x] Linguagens: PHP (a partir da versão 5.6)
 - [x] Framework: Opcional
-- [ ] Informações devem ser persistidas em um banco relacional
+- [x] Informações devem ser persistidas em um banco relacional
 - [x] Deverá ser criado o dockerfile para a montagem do ambiente
 - [x] Os arquivos devem ser disponibilizados em um repositório GIT.
 
@@ -15,7 +15,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
 
 ## Serviços a serem criados:
 
-- [ ] Inclusão de corredores para uma corrida
+- [x] Inclusão de corredores para uma corrida
     - ID único
     - Nome
     - CPF
