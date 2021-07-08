@@ -23,7 +23,7 @@ class CPFTest extends \PHPUnit\Framework\TestCase
     {
         // https://tiagoporto.github.io/gerador-validador-cpf/
         return [
-            ['81026092141', '810.260.921-40'],
+            ['81026092140', '810.260.921-40'],
             ['84820226959', '848.202.269-59'],
             ['74442704309', '744.427.043-09']
         ];
