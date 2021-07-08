@@ -15,10 +15,10 @@ class CriaTabelaCorredores extends Migration
     {
         Schema::create('corredores', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('nome');
-            $table->string('cpf', 11);
+            $table->string('cpf', 11)->unique();
             $table->date('dataNascimento');
+            $table->timestamps();
         });
     }
 
