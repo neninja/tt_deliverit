@@ -1,5 +1,7 @@
 # teste_deliverit
 
+![Tests](https://github.com/nenitf/teste_deliverit/actions/workflows/tests.yml/badge.svg)
+
 Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 
 - [Orientações](orientacoes.md)
