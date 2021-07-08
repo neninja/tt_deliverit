@@ -19,5 +19,5 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 - Para testes durante o desenvolvimento:
     - Acesse o container ``docker exec -it app bash``
     - Execute os testes ``composer test``
-    > `composer test:filter CadastroCorredor` filtra os testes de `app/Core/Tests/UseCases/CadastroCorredorTest`
+    > `composer test:filter <filtro>` filtra testes
 - Para ci ``docker-compose exec app composer ci``
