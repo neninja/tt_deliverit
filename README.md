@@ -14,8 +14,6 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 - Baixe as dependências do composer ``docker-compose exec app composer install``
 - Crie as tabelas no banco ``docker-compose exec app php artisan migrate``
 
-> Utilize comandos do git **fora** do contêiner
-
 ## Teste
 
 - Para testes durante o desenvolvimento:
