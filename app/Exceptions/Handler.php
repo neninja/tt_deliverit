@@ -2,12 +2,15 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
+
+use Core\Exceptions\CoreException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,12 +52,33 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        return parent::render($request, $e);
+        // return parent::render($request, $e);
+
         $response = [
-            'message'=>$e->getMessage(),
-            'file'=>$e->getFile(),
-            'line'=>$e->getLine(),
+            'message' => "Erro interno",
         ];
-        return response()->json($response, 500);
+
+        if (App::environment('local')) {
+            $response['message'] = $e->getMessage();
+            $response['file'] = $e->getFile();
+            $response['line'] = $e->getLine();
+        }
+
+        if ($e instanceof CoreException) {
+            $response['message'] = $e->getMessage();
+            return $this->jsonResponse($response, 400);
+        }
+
+        return $this->jsonResponse($response, 500);
+    }
+
+    protected function jsonResponse($body, $code)
+    {
+        return response()->json(
+            $body,
+            $code,
+            ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 }
