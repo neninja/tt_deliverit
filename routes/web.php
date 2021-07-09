@@ -10,3 +10,6 @@ $router->get('/swagger', function () use ($router) {
 
 $router->get('corredores', 'CorredorController@index');
 $router->post('corredores', 'CorredorController@store');
+
+$router->get('provas', 'ProvaController@index');
+$router->post('provas', 'ProvaController@store');

@@ -7,7 +7,7 @@ use App\Models\Corredor as M;
 
 class CorredoresRepository implements \Core\Contracts\Repositories\ICorredoresRepository
 {
-    protected function e2m(?Corredor $e)
+    protected function e2m(Corredor $e)
     {
         $m = new M();
         if(!is_null($e->id)){

@@ -11,7 +11,8 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 - Crie os containers ``docker-compose up -d --build``
     - Pare o container com ``docker-compose down``
 - Baixe as dependências do composer ``docker-compose exec app composer install``
-- Crie as tabelas no banco ``docker-compose exec app php artisan migrate``
+- Crie as tabelas no banco ``docker-compose exec app php artisan migrate --seed``
+    > Você pode limpar as tabelas ``docker-compose exec app php artisan migrate:refresh --seed``
 - Crie a documentação de suporte ``docker-compose exec app composer swagger`` e a acesse em ``localhost:8080/public/swagger``
 
 ## Teste

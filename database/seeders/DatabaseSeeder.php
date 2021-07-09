@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        DB::table('tiposProva')->insert([
+            ['distanciaEmKM' => 3],
+            ['distanciaEmKM' => 5],
+            ['distanciaEmKM' => 10],
+            ['distanciaEmKM' => 21],
+            ['distanciaEmKM' => 42]
+        ]);
     }
 }

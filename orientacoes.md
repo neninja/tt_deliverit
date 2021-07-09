@@ -20,7 +20,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
     - Nome
     - CPF
     - Data de nascimento
-- [ ] Inclusão de provas
+- [x] Inclusão de provas
     - Id da prova
     - Tipo de prova (3, 5, 10, 21, 42km)
     - Data
