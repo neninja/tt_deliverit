@@ -62,7 +62,7 @@ class CorredorController extends Controller
             $qb->where('cpf', '=', $cpf);
 
         $corredores = $qb
-            ->select('nome', 'cpf', 'dataNascimento')
+            ->select('id', 'nome', 'cpf', 'dataNascimento')
             ->get();
 
         return [
