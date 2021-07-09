@@ -65,9 +65,7 @@ class CorredorController extends Controller
             ->select('id', 'nome', 'cpf', 'dataNascimento')
             ->get();
 
-        return [
-            'data' => $corredores
-        ];
+        return ['data' => $corredores];
     }
 
     /**
@@ -110,8 +108,6 @@ class CorredorController extends Controller
 
         $corredor = $this->cadastroCorredorUC->execute($dto);
 
-        return new CorredorResource(
-            $corredor
-        );
+        return new CorredorResource($corredor);
     }
 }
