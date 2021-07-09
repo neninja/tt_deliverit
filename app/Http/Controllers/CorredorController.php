@@ -20,6 +20,28 @@ class CorredorController extends Controller
         $this->cadastroCorredorUC = $cadastroCorredorUC;
     }
 
+    /**
+     * @OA\Get(
+     *     tags={"corredor"},
+     *     path="/corredores",
+     *     description="Lista corredores",
+     *     @OA\Parameter(
+     *         description="Nome do corredor",
+     *         in="query",
+     *         name="nome",
+     *         required=false,
+     *         @OA\Schema(type="string", example="Diego")
+     *     ),
+     *     @OA\Parameter(
+     *         description="CPF do corredor",
+     *         in="query",
+     *         name="cpf",
+     *         required=false,
+     *         @OA\Schema(type="string", example="45681355322")
+     *     ),
+     *     @OA\Response(response="200", description="Lista de corredores")
+     * )
+     */
     public function index(Request $req)
     {
         $qtd = $req->qtd ?: 2;
@@ -48,6 +70,35 @@ class CorredorController extends Controller
         ];
     }
 
+    /**
+     * @OA\Post(
+     *     tags={"corredor"},
+     *     path="/corredores",
+     *     description="Cadastro corredor",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json;charset=UTF-8",
+     *         @OA\Schema(
+     *             @OA\Property(
+     *                  property="nome",
+     *                  type="string",
+     *                  example="Diego"
+     *             ),
+     *             @OA\Property(
+     *                  property="cpf",
+     *                  type="string",
+     *                  example="37128197060"
+     *             ),
+     *             @OA\Property(
+     *                  property="dataNascimento",
+     *                  type="string",
+     *                  example="19800507"
+     *             )
+     *         ),
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Corredor criado")
+     * )
+     */
     public function store(Request $req)
     {
         $dto = new CadastroCorredorDTO();
