@@ -9,8 +9,8 @@ RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 # THANKS: https://github.com/docker-library/php/issues/221#issuecomment-601129850
 RUN apt-get update; \
-    apt-get install -y libpq5 libpq-dev; \
-    docker-php-ext-install pdo pdo_pgsql; \
+    apt-get install -y libpq5 libpq-dev libzip-dev zip; \
+    docker-php-ext-install pdo pdo_pgsql zip; \
     apt-get autoremove --purge -y libpq-dev; \
     apt-get clean ; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
