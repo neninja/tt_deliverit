@@ -9,7 +9,7 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 ## Setup
 
 - Crie os containers ``docker-compose up -d --build``
-    - Pare o container com ``docker-compose down``
+    > Você pode parar os containers com ``docker-compose down``
 - Baixe as dependências do composer ``docker-compose exec app composer install``
 - Crie as tabelas no banco ``docker-compose exec app php artisan migrate --seed``
     > Você pode limpar as tabelas ``docker-compose exec app php artisan migrate:refresh --seed``
@@ -20,5 +20,5 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 - Para testes durante o desenvolvimento:
     - Acesse o container ``docker exec -it app bash``
     - Execute os testes ``composer test``
-    > `composer test:filter <filtro>` filtra testes
+        > `composer test:filter <filtro>` filtra testes
 - Para ci ``docker-compose exec app composer ci``
