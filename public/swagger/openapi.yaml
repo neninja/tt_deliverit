@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  title: 'Teste Deliver IT'
+  version: 1.0.0
+paths:
+  /corredores:
+    get:
+      tags:
+        - corredor
+      description: 'Lista corredores'
+      operationId: 071330b3d8b017b9c9d64cea41183b4a
+      parameters:
+        -
+          name: nome
+          in: query
+          description: 'Nome do corredor'
+          required: false
+          schema:
+            type: string
+            example: Diego
+        -
+          name: cpf
+          in: query
+          description: 'CPF do corredor'
+          required: false
+          schema:
+            type: string
+            example: '45681355322'
+      responses:
+        '200':
+          description: 'Lista de corredores'
+    post:
+      tags:
+        - corredor
+      description: 'Cadastro corredor'
+      operationId: 16e16812f655e91fc0d59dd960f28c72
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              properties:
+                nome:
+                  type: string
+                  example: Diego
+                cpf:
+                  type: string
+                  example: '37128197060'
+                dataNascimento:
+                  type: string
+                  example: '19800507'
+              type: object
+      responses:
+        '200':
+          description: 'Corredor criado'

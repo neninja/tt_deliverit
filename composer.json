@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
-        "laravel/lumen-framework": "^8.0"
+        "laravel/lumen-framework": "^8.0",
+        "zircote/swagger-php": "^3.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -41,6 +42,7 @@
         "test:filter": "phpunit --testdox --filter",
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ]
+        ],
+        "swagger": "openapi --bootstrap ./swagger/consts.php --output ./public/swagger ./swagger/v1.php ./app/Http/Controllers"
     }
 }
