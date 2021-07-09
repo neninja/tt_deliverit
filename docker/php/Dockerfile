@@ -17,8 +17,3 @@ RUN apt-get update; \
 
 # instala composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# instala ferramentas úteis
-RUN apt-get update
-RUN apt-get install -y \
-    vim
