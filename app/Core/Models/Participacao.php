@@ -12,8 +12,8 @@ class Participacao
     public ?int $id;
     public Corredor $corredor;
     public Prova $prova;
-    public ?\DateTime $hourarioInicio;
-    public ?\DateTime $hourarioFim;
+    public ?\DateTime $horarioInicio = null;
+    public ?\DateTime $horarioFim = null;
 
     public function __construct($id, $corredor, $prova)
     {
