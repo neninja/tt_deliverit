@@ -153,7 +153,7 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
         } catch (CoreException $e) {
             self::assertEquals(
                 $e->mensagemAmigavel(),
-                "Corredor já cadastrado em outra prova no mesmo dia"
+                "Corredor já cadastrado no mesmo dia"
             );
         }
     }
