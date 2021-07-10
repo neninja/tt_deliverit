@@ -137,12 +137,12 @@ class ParticipacaoController extends Controller
      *             @OA\Property(
      *                  property="horarioInicio",
      *                  type="string",
-     *                  example="1"
+     *                  example="09:00"
      *             ),
      *             @OA\Property(
      *                  property="horarioFim",
      *                  type="string",
-     *                  example="1"
+     *                  example="11:00"
      *             )
      *         )
      *         )
