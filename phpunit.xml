@@ -3,10 +3,13 @@
          xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
->
+         defaultTestSuite="core"
+        >
     <testsuites>
-        <testsuite name="app">
+        <testsuite name="core">
             <directory suffix="Test.php">./app/Core/Tests</directory>
+        </testsuite>
+        <testsuite name="app">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

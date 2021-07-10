@@ -38,6 +38,9 @@
         "ci": [
             "phpunit"
         ],
+        "ci:gh": [
+            "phpunit --testsuite core"
+        ],
         "test": "phpunit --testdox",
         "test:filter": "phpunit --testdox --filter",
         "post-root-package-install": [
