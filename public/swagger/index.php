@@ -38,6 +38,14 @@
     <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
     <script>
     window.onload = function() {
+      // THANKS https://github.com/swagger-api/swagger-ui/issues/5020#issuecomment-653756698
+      const HideCurlPlugin = () => {
+        return {
+          wrapComponents: {
+            curl: () => () => null
+          }
+        }
+      }
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
       url: "http://<?=API_HOST?>/public/swagger/openapi.yaml",
@@ -48,7 +56,8 @@
           SwaggerUIStandalonePreset
         ],
         plugins: [
-          SwaggerUIBundle.plugins.DownloadUrl
+          SwaggerUIBundle.plugins.DownloadUrl,
+          HideCurlPlugin
         ],
         layout: "StandaloneLayout"
       });
