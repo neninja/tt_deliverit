@@ -14,7 +14,6 @@ use Core\Contracts\Repositories\{
     IProvasRepository,
     ITiposProvaRepository,
 };
-use Core\Contracts\Repositories\ICorredoresRepository;
 
 class CadastroProvaTest extends \PHPUnit\Framework\TestCase
 {
