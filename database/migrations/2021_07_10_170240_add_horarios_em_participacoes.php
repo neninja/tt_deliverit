@@ -14,8 +14,8 @@ class AddHorariosEmParticipacoes extends Migration
     public function up()
     {
         Schema::table('participacoes', function (Blueprint $table) {
-            $table->time('horarioInicio');
-            $table->time('horarioFim');
+            $table->time('horarioInicio')->nullable();
+            $table->time('horarioFim')->nullable();
         });
     }
 
