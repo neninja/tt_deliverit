@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Inscricao extends Model
+class Participacao extends Model
 {
-    protected $table = 'inscricoes';
+    protected $table = 'participacoes';
 
     protected $fillable = [
         'id_corredor',
         'id_prova',
+        'horarioInicio',
+        'horarioFim',
     ];
 
     public function corredor(){

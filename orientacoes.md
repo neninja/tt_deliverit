@@ -27,7 +27,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
 - [x] Inclusão de corredores em provas
     - ID do corredor
     - ID da prova
-- [ ] Inclusão de resultados dos corredores
+- [x] Inclusão de resultados dos corredores
     - ID do corredor
     - ID da prova
     - Horário de início da prova
@@ -50,7 +50,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
 
 ## Regras de negócio
 
-- [ ] Todos os campos são obrigatórios.
+- [x] Todos os campos são obrigatórios.
 - [x] Não é permitido cadastrar o mesmo corredor em duas provas diferentes na mesma data.
     > Por exemplo, o corredor Barry Allen não pode estar cadastrado nas provas de 21km e 42km no dia 05/10/2019.
 - [x] Não é permitida a inscrição de menores de idade.

@@ -14,5 +14,6 @@ $router->post('corredores', 'CorredorController@store');
 $router->get('provas', 'ProvaController@index');
 $router->post('provas', 'ProvaController@store');
 
-$router->get('inscricoes', 'InscricaoController@index');
-$router->post('inscricoes', 'InscricaoController@store');
+$router->get('participacoes', 'ParticipacaoController@index');
+$router->post('participacoes', 'ParticipacaoController@store');
+$router->put('participacoes', 'ParticipacaoController@update'); // chave composta

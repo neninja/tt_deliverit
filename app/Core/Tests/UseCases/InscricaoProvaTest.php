@@ -7,7 +7,7 @@ use Core\Models\{
     Prova,
     TipoProva,
     Corredor,
-    Inscricao,
+    Participacao,
 };
 use Core\UseCases\InscricaoProva\{
     InscricaoProvaUC,
@@ -16,7 +16,7 @@ use Core\UseCases\InscricaoProva\{
 use Core\Contracts\Repositories\{
     IProvasRepository,
     ICorredoresRepository,
-    IInscricoesRepository,
+    IParticipacoesRepository,
 };
 
 class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
@@ -29,8 +29,8 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
 
     private function setUpDoubles()
     {
-        $this->doubleInscricoesRepo = self::createMock(
-            IInscricoesRepository::class
+        $this->doubleParticipacoesRepo = self::createMock(
+            IParticipacoesRepository::class
         );
 
         $this->doubleCorredoresRepo = self::createMock(
@@ -46,7 +46,7 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
         return $this
             ->getMockBuilder(InscricaoProvaUC::class)
             ->setConstructorArgs([
-                $this->doubleInscricoesRepo,
+                $this->doubleParticipacoesRepo,
                 $this->doubleCorredoresRepo,
                 $this->doubleProvasRepo,
             ])
@@ -70,7 +70,7 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
         );
 
         $novoId = 5454668456;
-        $novaInscricao = new Inscricao($novoId, $corredor, $prova);
+        $novaInscricao = new Participacao($novoId, $corredor, $prova);
 
         $this
             ->doubleCorredoresRepo
@@ -78,8 +78,8 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
             ->willReturn($corredor);
 
         $this
-            ->doubleInscricoesRepo
-            ->method('possuiInscricaoNoDia')
+            ->doubleParticipacoesRepo
+            ->method('possuiParticipacaoNoDia')
             ->willReturn(false);
 
         $this
@@ -88,7 +88,7 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
             ->willReturn($prova);
 
         $this
-            ->doubleInscricoesRepo
+            ->doubleParticipacoesRepo
             ->method('save')
             ->willReturn($novaInscricao);
 
@@ -119,7 +119,7 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
         );
 
         $novoId = 5454668456;
-        $novaInscricao = new Inscricao($novoId, $corredor, $prova);
+        $novaInscricao = new Participacao($novoId, $corredor, $prova);
 
         $this
             ->doubleCorredoresRepo
@@ -127,8 +127,8 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
             ->willReturn($corredor);
 
         $this
-            ->doubleInscricoesRepo
-            ->method('possuiInscricaoNoDia')
+            ->doubleParticipacoesRepo
+            ->method('possuiParticipacaoNoDia')
             ->willReturn(true);
 
         $this
@@ -137,7 +137,7 @@ class InscricaoProvaTest extends \PHPUnit\Framework\TestCase
             ->willReturn($prova);
 
         $this
-            ->doubleInscricoesRepo
+            ->doubleParticipacoesRepo
             ->method('save')
             ->willReturn($novaInscricao);
 

@@ -14,14 +14,14 @@ use Core\Contracts\Repositories\{
     ICorredoresRepository,
     IProvasRepository,
     ITiposProvaRepository,
-    IInscricoesRepository,
+    IParticipacoesRepository,
 };
 
 use App\Infra\Repositories\Eloquent\{
     CorredoresRepository,
     ProvasRepository,
     TiposProvaRepository,
-    InscricoesRepository,
+    ParticipacoesRepository,
 };
 
 class AppServiceProvider extends ServiceProvider
@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            IInscricoesRepository::class, InscricoesRepository::class
+            IParticipacoesRepository::class, ParticipacoesRepository::class
         );
 
         $this->app->bind(CadastroCorredorUC::class, function ($app) {
@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(InscricaoProvaUC::class, function ($app) {
             return new InscricaoProvaUC(
-                $app->make(IInscricoesRepository::class),
+                $app->make(IParticipacoesRepository::class),
                 $app->make(ICorredoresRepository::class),
                 $app->make(IProvasRepository::class)
             );

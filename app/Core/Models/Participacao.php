@@ -7,11 +7,13 @@ use Core\Models\{
     Prova,
 };
 
-class Inscricao
+class Participacao
 {
     public ?int $id;
     public Corredor $corredor;
     public Prova $prova;
+    public ?\DateTime $hourarioInicio;
+    public ?\DateTime $hourarioFim;
 
     public function __construct($id, $corredor, $prova)
     {

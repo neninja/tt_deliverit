@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class InscricaoResource extends JsonResource
+class ParticipacaoResource extends JsonResource
 {
     public function toArray($request)
     {
@@ -19,6 +19,8 @@ class InscricaoResource extends JsonResource
                 'data' => $this->prova->data->format('Y-m-d'),
                 'distanciaEmKM' => $this->prova->tipo->distanciaEmKM,
             ],
+            'horarioInicio' => $this->horarioInicio->format('H:i'),
+            'horarioFim' => $this->horarioFim->format('H:i'),
         ];
     }
 }

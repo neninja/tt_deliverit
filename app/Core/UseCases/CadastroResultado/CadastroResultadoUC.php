@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\UseCases\InscricaoProva;
+namespace Core\UseCases\CadastroResultado;
 
 use Core\Exceptions\UseCaseException;
 use Core\Models\Participacao;
@@ -9,8 +9,7 @@ use Core\Contracts\Repositories\{
     ICorredoresRepository,
     IProvasRepository,
 };
-
-class InscricaoProvaUC
+class CadastroResultadoUC
 {
     private IParticipacoesRepository $participacoesRepository;
     private ICorredoresRepository $corredoresProvaRepo;
@@ -26,7 +25,7 @@ class InscricaoProvaUC
         $this->provasRepo = $provasRepo;
     }
 
-    public function execute(InscricaoProvaDTO $dto)
+    public function execute(CadastroResultadoDTO $dto)
     {
         $corredor = $this
             ->corredoresRepo
@@ -44,23 +43,23 @@ class InscricaoProvaUC
             throw new UseCaseException("Prova não encontrada");
         }
 
-        $diaJaOcupado = $this
+        $participacao = $this
             ->participacoesRepo
-            ->possuiParticipacaoNoDia($prova->data);
+            ->findByCorredorProva($corredor->id, $prova->id);
 
-        if($diaJaOcupado) {
+        if(is_null($participacao)) {
             throw new UseCaseException(
-                "Corredor já cadastrado em outra prova no mesmo dia"
+                "Corredor não foi inscrito para esta prova"
             );
         }
 
-        $novaInscricao = new Participacao(null, $corredor, $prova);
+        $participacao->horarioInicio = $dto->horarioInicio->format('H:i');
+        $participacao->horarioFim = $dto->horarioFim->format('H:i');
 
         $inscricao = $this
             ->participacoesRepo
-            ->save($novaInscricao);
+            ->save($participacao);
 
         return $inscricao;
     }
 }
-
