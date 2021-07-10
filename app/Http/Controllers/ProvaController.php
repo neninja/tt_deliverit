@@ -20,6 +20,28 @@ class ProvaController extends Controller
         $this->cadastroProvaUC = $cadastroProvaUC;
     }
 
+    /**
+     * @OA\Get(
+     *     tags={"prova"},
+     *     path="/provas",
+     *     description="Lista provas",
+     *     @OA\Parameter(
+     *         description="Id do tipo de prova",
+     *         in="query",
+     *         name="tipo",
+     *         required=false,
+     *         @OA\Schema(type="int", example="1")
+     *     ),
+     *     @OA\Parameter(
+     *         description="Data da prova",
+     *         in="query",
+     *         name="nome",
+     *         required=false,
+     *         @OA\Schema(type="string", example="20210706")
+     *     ),
+     *     @OA\Response(response="200", description="Lista de provas")
+     * )
+     */
     public function index(Request $req)
     {
         $qtd = $req->qtd ?: 2;
@@ -52,6 +74,30 @@ class ProvaController extends Controller
         return ['data' => $provas];
     }
 
+    /**
+     * @OA\Post(
+     *     tags={"prova"},
+     *     path="/provas",
+     *     description="Cadastro prova",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json;charset=UTF-8",
+     *         @OA\Schema(
+     *             @OA\Property(
+     *                  property="tipo",
+     *                  type="int",
+     *                  example="1"
+     *             ),
+     *             @OA\Property(
+     *                  property="data",
+     *                  type="string",
+     *                  example="20210706"
+     *             )
+     *         )
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Prova criada")
+     * )
+     */
     public function store(Request $req)
     {
         $dto = new CadastroProvaDTO();
