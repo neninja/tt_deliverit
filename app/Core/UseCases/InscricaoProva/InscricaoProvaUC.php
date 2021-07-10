@@ -50,7 +50,7 @@ class InscricaoProvaUC
 
         if($diaJaOcupado) {
             throw new UseCaseException(
-                "Corredor já cadastrado em outra prova no mesmo dia"
+                "Corredor já cadastrado no mesmo dia"
             );
         }
 
