@@ -9,6 +9,7 @@ use Core\Contracts\Repositories\{
     ICorredoresRepository,
     IProvasRepository,
 };
+
 class CadastroResultadoUC
 {
     private IParticipacoesRepository $participacoesRepository;
@@ -53,8 +54,8 @@ class CadastroResultadoUC
             );
         }
 
-        $participacao->horarioInicio = $dto->horarioInicio->format('H:i');
-        $participacao->horarioFim = $dto->horarioFim->format('H:i');
+        $participacao->horarioInicio = $dto->horarioInicio;
+        $participacao->horarioFim = $dto->horarioFim;
 
         $inscricao = $this
             ->participacoesRepo
