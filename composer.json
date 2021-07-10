@@ -36,7 +36,7 @@
     "prefer-stable": true,
     "scripts": {
         "ci": [
-            "phpunit"
+            "phpunit --testsuite core,app"
         ],
         "ci:gh": [
             "phpunit --testsuite core"
