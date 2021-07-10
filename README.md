@@ -16,6 +16,8 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
     > Você pode limpar as tabelas ``docker-compose exec app php artisan migrate:refresh --seed``
 - Crie a documentação de suporte ``docker-compose exec app composer swagger`` e a acesse em ``localhost:8080/public/swagger``
 
+> `docker-compose exec app php artisan db:seed --class FakeSeeder` irá criar +3 corredores e +5 provas
+
 ## Teste
 
 - Para testes durante o desenvolvimento:
