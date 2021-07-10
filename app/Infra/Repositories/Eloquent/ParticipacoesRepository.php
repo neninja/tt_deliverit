@@ -72,7 +72,7 @@ class ParticipacoesRepository implements \Core\Contracts\Repositories\IParticipa
             return $query->whereDate('data', '=', $dia->format('Y-m-d'));
         })->get();
 
-        return empty($participacoes);
+        return $participacoes->count() > 0;
     }
 }
 
