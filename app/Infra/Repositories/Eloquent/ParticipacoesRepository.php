@@ -15,25 +15,32 @@ class ParticipacoesRepository implements \Core\Contracts\Repositories\IParticipa
         }
         $m->id_corredor = $e->corredor->id;
         $m->id_prova = $e->prova->id;
-        $m->horarioInicio = $e->horarioInicio->format('H:i') ?? null;
-        $m->horarioFim = $e->horarioFim->format('H:i') ?? null;
+        $m->horarioInicio = is_null($e->horarioInicio)
+            ? null : $e->horarioInicio->format('H:i');
+        $m->horarioFim = is_null($e->horarioInicio)
+            ? null : $e->horarioFim->format('H:i');
         return $m;
     }
 
-    public static function m2e(?M $m): ?Prova
+    public static function m2e(?M $m): ?Participacao
     {
         if(is_null($m)) {
             return null;
         }
 
-        $e = new Prova(
+        $e = new Participacao(
             $m->id,
             CorredoresRepository::m2e($m->corredor),
-            ProvaRepository::m2e($m->prova)
+            ProvasRepository::m2e($m->prova)
         );
 
-        $e->horarioInicio = date_create_from_format('H:i', $m->horarioInicio);
-        $e->horarioFim = date_create_from_format('H:i', $m->horarioFim);
+        if(!is_null($m->horarioInicio)){
+            $e->horarioInicio = date_create_from_format('H:i', $m->horarioInicio);
+        }
+
+        if(!is_null($m->horarioFim)){
+            $e->horarioFim = date_create_from_format('H:i', $m->horarioFim);
+        }
         return $e;
     }
 
@@ -61,7 +68,7 @@ class ParticipacoesRepository implements \Core\Contracts\Repositories\IParticipa
 
     public function possuiParticipacaoNoDia(\DateTime $dia): bool
     {
-        $participacoes = M::whereHas('prova', function ($query) {
+        $participacoes = M::whereHas('prova', function ($query) use ($dia) {
             return $query->whereDate('data', '=', $dia->format('Y-m-d'));
         })->get();
 

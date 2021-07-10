@@ -19,8 +19,10 @@ class ParticipacaoResource extends JsonResource
                 'data' => $this->prova->data->format('Y-m-d'),
                 'distanciaEmKM' => $this->prova->tipo->distanciaEmKM,
             ],
-            'horarioInicio' => $this->horarioInicio->format('H:i'),
-            'horarioFim' => $this->horarioFim->format('H:i'),
+            'horarioInicio' => is_null($this->horarioInicio)
+                ? null : $this->horarioInicio->format('H:i'),
+            'horarioFim' => is_null($this->horarioFim)
+                ? null : $this->horarioFim->format('H:i'),
         ];
     }
 }
