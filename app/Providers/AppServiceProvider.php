@@ -7,18 +7,21 @@ use Illuminate\Support\ServiceProvider;
 use Core\UseCases\{
     CadastroCorredor\CadastroCorredorUC,
     CadastroProva\CadastroProvaUC,
+    InscricaoProva\InscricaoProvaUC,
 };
 
 use Core\Contracts\Repositories\{
     ICorredoresRepository,
     IProvasRepository,
     ITiposProvaRepository,
+    IInscricoesRepository,
 };
 
 use App\Infra\Repositories\Eloquent\{
     CorredoresRepository,
     ProvasRepository,
     TiposProvaRepository,
+    InscricoesRepository,
 };
 
 class AppServiceProvider extends ServiceProvider
@@ -37,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
             ITiposProvaRepository::class, TiposProvaRepository::class
         );
 
+        $this->app->bind(
+            IInscricoesRepository::class, InscricoesRepository::class
+        );
+
         $this->app->bind(CadastroCorredorUC::class, function ($app) {
             return new CadastroCorredorUC(
                 $app->make(ICorredoresRepository::class)
@@ -47,6 +54,14 @@ class AppServiceProvider extends ServiceProvider
             return new CadastroProvaUC(
                 $app->make(IProvasRepository::class),
                 $app->make(ITiposProvaRepository::class)
+            );
+        });
+
+        $this->app->bind(InscricaoProvaUC::class, function ($app) {
+            return new InscricaoProvaUC(
+                $app->make(IInscricoesRepository::class),
+                $app->make(ICorredoresRepository::class),
+                $app->make(IProvasRepository::class)
             );
         });
     }

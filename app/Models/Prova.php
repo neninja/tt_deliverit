@@ -10,11 +10,11 @@ class Prova extends Model
 
     protected $fillable = [
         'data',
-        'id_tiposProva',
     ];
 
-    public function tipoProva(){
-        return $this->belongsTo(TipoProva::class, 'id_tiposProva');
+    public function tipo()
+    {
+        return $this->belongsTo(TipoProva::class, 'id_tipoProva');
     }
 }
 

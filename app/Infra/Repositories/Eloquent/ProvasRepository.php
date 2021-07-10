@@ -7,7 +7,7 @@ use App\Models\Prova as M;
 
 class ProvasRepository implements \Core\Contracts\Repositories\IProvasRepository
 {
-    protected function e2m(Prova $e)
+    public static function e2m(Prova $e)
     {
         $m = new M();
         if(!is_null($e->id)){
@@ -19,11 +19,26 @@ class ProvasRepository implements \Core\Contracts\Repositories\IProvasRepository
         return $m;
     }
 
+    public static function m2e(?M $m): ?Prova
+    {
+        return $m ? new Prova(
+            $m->id,
+            TiposProvaRepository::m2e($m->tipo),
+            date_create_from_format('Y-m-d', $m->data)
+        ) : null;
+    }
+
     public function save(Prova $e): Prova
     {
-        $m = $this->e2m($e);
+        $m = self::e2m($e);
         $m->save();
         $e->id = $m->id;
         return $e;
+    }
+
+    public function findById(int $id): ?Prova
+    {
+        $m = M::find($id);
+        return self::m2e($m);
     }
 }

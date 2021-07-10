@@ -9,9 +9,7 @@ class TipoProva extends Model
     protected $table = 'tiposProva';
 
     protected $fillable = [
-        'nome',
-        'cpf',
-        'dataNascimento',
+        'distanciaEmKM',
     ];
 }
 

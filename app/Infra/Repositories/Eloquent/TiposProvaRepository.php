@@ -7,7 +7,7 @@ use App\Models\TipoProva as M;
 
 class TiposProvaRepository implements \Core\Contracts\Repositories\ITiposProvaRepository
 {
-    protected function e2m(TipoProva $e)
+    public static function e2m(TipoProva $e)
     {
         $m = new M();
         if(!is_null($e->id)){
@@ -17,7 +17,7 @@ class TiposProvaRepository implements \Core\Contracts\Repositories\ITiposProvaRe
         return $m;
     }
 
-    protected function m2e(?M $m): ?TipoProva
+    public static function m2e(?M $m): ?TipoProva
     {
         return $m ? new TipoProva(
             $m->id,
@@ -28,6 +28,6 @@ class TiposProvaRepository implements \Core\Contracts\Repositories\ITiposProvaRe
     public function findById(int $id): ?TipoProva
     {
         $m = M::find($id);
-        return $this->m2e($m);
+        return self::m2e($m);
     }
 }

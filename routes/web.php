@@ -13,3 +13,6 @@ $router->post('corredores', 'CorredorController@store');
 
 $router->get('provas', 'ProvaController@index');
 $router->post('provas', 'ProvaController@store');
+
+$router->get('inscricoes', 'InscricaoController@index');
+$router->post('inscricoes', 'InscricaoController@store');
