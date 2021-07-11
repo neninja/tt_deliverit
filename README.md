@@ -24,5 +24,4 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
     - Acesse o container ``docker exec -it app bash``
     - Execute os testes ``composer test``
         > `composer test:filter <filtro>` filtra testes
-        > `composer test -- --testsuite app` testa requisições http
 - Para ci ``docker-compose exec app composer ci``
