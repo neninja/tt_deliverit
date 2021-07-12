@@ -179,21 +179,14 @@ class ParticipacaoController extends Controller
     /**
      * @OA\Get(
      *     tags={"classificação"},
-     *     path="/participacoes/{prova}/classificacao-por-idade",
+     *     path="/participacoes/classificacao-por-idade",
      *     description="Classificação por grupos de idade",
-     *     @OA\Parameter(
-     *         description="Id da prova",
-     *         in="path",
-     *         name="prova",
-     *         required=false,
-     *         @OA\Schema(type="int", example="1")
-     *     ),
      *     @OA\Response(response="200", description="Classificação dividida por grupos de idades")
      * )
      */
-    public function classificacaoPorIdade(int $idProva)
+    public function classificacaoPorIdade()
     {
-        $classifica = function(int $idadeMin, int $idadeMax) use ($idProva) {
+        $classifica = function(int $idadeMin, int $idadeMax) {
             return DB::table('participacoes')
                 ->join('corredores', 'corredores.id', '=', 'participacoes.id_corredor')
                 ->join('provas', 'provas.id', '=', 'participacoes.id_prova')
@@ -210,7 +203,6 @@ class ParticipacaoController extends Controller
                     'participacoes.horarioFim',
                     'participacoes.horarioInicio as tempoDeProva',
                 )
-                ->where('participacoes.id_prova', '=', $idProva)
                 ->whereDate('corredores.dataNascimento', '<=', date('Y-m-d', strtotime("-{$idadeMin} year")))
                 ->whereDate('corredores.dataNascimento', '>', date('Y-m-d', strtotime("-{$idadeMax} year")))
                 ->get()
@@ -223,13 +215,14 @@ class ParticipacaoController extends Controller
                 })
                 ->sortBy('tempoDeProva')
                 ->values()
+                ->unique('id_corredor')
+                ->values()
                 ->map(function ($p, $i) {
                     $p->posicao = $i + 1;
                     return $p;
                 })
-                ->all()
-            ;
-
+                ->values()
+                ->all();
         };
 
         return [

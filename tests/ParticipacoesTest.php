@@ -24,8 +24,8 @@ class ParticipacoesTest extends TestCase
     public function testDeveListarClassificacoesPorIdade($retorno)
     {
         \Tests\ParticipacoesData\DeveListarClassificacoesPorIdade::seed();
-        $this->get('/participacoes/1/classificacao-por-idade')
-             ->seeJson($retorno);
+        $this->get('/participacoes/classificacao-por-idade')
+             ->seeJson([ 'data' => $retorno ]);
     }
 
     /**
