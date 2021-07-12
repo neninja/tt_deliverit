@@ -257,7 +257,7 @@ class DeveListarClassificacoesPorTipoDeProva extends \Tests\TestCase
                 'id_corredor' => 23,
                 'id_prova' => 3,
                 'horarioInicio' => '8:00',
-                'horarioFim' => '12:00',
+                'horarioFim' => '08:10',
             ],
             [ // 16
                 'id_corredor' => 15,
@@ -265,214 +265,250 @@ class DeveListarClassificacoesPorTipoDeProva extends \Tests\TestCase
                 'horarioInicio' => '8:00',
                 'horarioFim' => '12:00',
             ],
+            [ // 17
+                'id_corredor' => 16,
+                'id_prova' => 3,
+                'horarioInicio' => '8:00',
+                'horarioFim' => '8:30',
+            ],
         ]);
     }
 
     public static function data()
     {
-        yield '3km' => [
+        yield [
             [
-                'id' => 7,
-                'posicao' => 1,
-                'corredor' => [
-                    'id' => 2,
-                    'nome' => 'Lauren',
+                '3km' => [
+                    [
+                        'id' => 7,
+                        'posicao' => 1,
+                        'corredor' => [
+                            'id' => 2,
+                            'nome' => 'Lauren',
+                        ],
+                        'prova' => [
+                            'id' => 4,
+                            'data' => '2010-08-09',
+                            'distanciaEmKM' => 3,
+                        ]
+                    ],
+                    [
+                        'id' => 9,
+                        'posicao' => 2,
+                        'corredor' => [
+                            'id' => 1,
+                            'nome' => 'Rafael',
+                        ],
+                        'prova' => [
+                            'id' => 4,
+                            'data' => '2010-08-09',
+                            'distanciaEmKM' => 3,
+                        ]
+                    ],
+                    [
+                        'id' => 3,
+                        'posicao' => 3,
+                        'corredor' => [
+                            'id' => 3,
+                            'nome' => 'Eduarda',
+                        ],
+                        'prova' => [
+                            'id' => 4,
+                            'data' => '2010-08-09',
+                            'distanciaEmKM' => 3,
+                        ]
+                    ],
                 ],
-                'prova' => [
-                    'id' => 4,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 3,
-                ]
-            ],
-            [
-                'id' => 9,
-                'posicao' => 2,
-                'corredor' => [
-                    'id' => 1,
-                    'nome' => 'Rafael',
+                '5km' => [
+                    [
+                        'id' => 2,
+                        'posicao' => 1,
+                        'corredor' => [
+                            'id' => 5,
+                            'nome' => 'Luiz',
+                        ],
+                        'prova' => [
+                            'id' => 5,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 5,
+                        ]
+                    ],
+                    [
+                        'id' => 4,
+                        'posicao' => 2,
+                        'corredor' => [
+                            'id' => 4,
+                            'nome' => 'Ricardo',
+                        ],
+                        'prova' => [
+                            'id' => 5,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 5,
+                        ]
+                    ],
+                    [
+                        'id' => 8,
+                        'posicao' => 3,
+                        'corredor' => [
+                            'id' => 6,
+                            'nome' => 'Rasmus',
+                        ],
+                        'prova' => [
+                            'id' => 5,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 5,
+                        ]
+                    ],
                 ],
-                'prova' => [
-                    'id' => 4,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 3,
-                ]
-            ],
-            [
-                'id' => 3,
-                'posicao' => 3,
-                'corredor' => [
-                    'id' => 3,
-                    'nome' => 'Eduarda',
+                '10km' => [
+                    [
+                        'id' => 1,
+                        'posicao' => 3,
+                        'corredor' => [
+                            'id' => 14,
+                            'nome' => 'Rica',
+                        ],
+                        'prova' => [
+                            'id' => 2,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 10,
+                        ]
+                    ],
+                    [
+                        'id' => 6,
+                        'posicao' => 1,
+                        'corredor' => [
+                            'id' => 1,
+                            'nome' => 'Rafael',
+                        ],
+                        'prova' => [
+                            'id' => 2,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 10,
+                        ]
+                    ],
+                    [
+                        'id' => 16,
+                        'posicao' => 2,
+                        'corredor' => [
+                            'id' => 15,
+                            'nome' => 'Luizo',
+                        ],
+                        'prova' => [
+                            'id' => 2,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 10,
+                        ]
+                    ],
+                    [
+                        'id' => 5,
+                        'posicao' => 4,
+                        'corredor' => [
+                            'id' => 16,
+                            'nome' => 'Rod',
+                        ],
+                        'prova' => [
+                            'id' => 2,
+                            'data' => '2011-08-09',
+                            'distanciaEmKM' => 10,
+                        ]
+                    ],
                 ],
-                'prova' => [
-                    'id' => 4,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 3,
-                ]
-            ],
-        ];
-        yield '5km' => [
-            [
-                'id' => 2,
-                'posicao' => 1,
-                'corredor' => [
-                    'id' => 5,
-                    'nome' => 'Luiz',
+                '21km' => [
+                    [
+                        'id' => 10,
+                        'posicao' => 1,
+                        'corredor' => [
+                            'id' => 12,
+                            'nome' => 'Laurena',
+                        ],
+                        'prova' => [
+                            'id' => 1,
+                            'data' => '2010-08-09',
+                            'distanciaEmKM' => 21,
+                        ]
+                    ],
+                    [
+                        'id' => 11,
+                        'posicao' => 2,
+                        'corredor' => [
+                            'id' => 11,
+                            'nome' => 'Rafaela',
+                        ],
+                        'prova' => [
+                            'id' => 1,
+                            'data' => '2010-08-09',
+                            'distanciaEmKM' => 21,
+                        ]
+                    ],
+                    [
+                        'id' => 12,
+                        'posicao' => 3,
+                        'corredor' => [
+                            'id' => 13,
+                            'nome' => 'Eduardo',
+                        ],
+                        'prova' => [
+                            'id' => 1,
+                            'data' => '2010-08-09',
+                            'distanciaEmKM' => 21,
+                        ]
+                    ],
                 ],
-                'prova' => [
-                    'id' => 5,
-                    'data' => '2011-08-09',
-                    'distanciaEmKM' => 5,
-                ]
-            ],
-            [
-                'id' => 4,
-                'posicao' => 2,
-                'corredor' => [
-                    'id' => 4,
-                    'nome' => 'Ricardo',
+                '42km' => [
+                    [
+                        'id' => 15,
+                        'posicao' => 1,
+                        'corredor' => [
+                            'id' => 23,
+                            'nome' => 'Edi',
+                        ],
+                        'prova' => [
+                            'id' => 3,
+                            'data' => '2012-08-09',
+                            'distanciaEmKM' => 42,
+                        ],
+                    ],
+                    [
+                        'id' => 17,
+                        'posicao' => 2,
+                        'corredor' => [
+                            'id' => 16,
+                            'nome' => 'Rod',
+                        ],
+                        'prova' => [
+                            'id' => 3,
+                            'data' => '2012-08-09',
+                            'distanciaEmKM' => 42,
+                        ]
+                    ],
+                    [
+                        'id' => 13,
+                        'posicao' => 3,
+                        'corredor' => [
+                            'id' => 22,
+                            'nome' => 'Laureni',
+                        ],
+                        'prova' => [
+                            'id' => 3,
+                            'data' => '2012-08-09',
+                            'distanciaEmKM' => 42,
+                        ]
+                    ],
+                    [
+                        'id' => 14,
+                        'posicao' => 4,
+                        'corredor' => [
+                            'id' => 21,
+                            'nome' => 'Rafaeli',
+                        ],
+                        'prova' => [
+                            'id' => 3,
+                            'data' => '2012-08-09',
+                            'distanciaEmKM' => 42,
+                        ]
+                    ],
                 ],
-                'prova' => [
-                    'id' => 5,
-                    'data' => '2011-08-09',
-                    'distanciaEmKM' => 5,
-                ]
-            ],
-            [
-                'id' => 8,
-                'posicao' => 3,
-                'corredor' => [
-                    'id' => 6,
-                    'nome' => 'Rasmus',
-                ],
-                'prova' => [
-                    'id' => 5,
-                    'data' => '2011-08-09',
-                    'distanciaEmKM' => 5,
-                ]
-            ],
-        ];
-        yield '10km' => [
-            [
-                'id' => 16,
-                'posicao' => 1,
-                'corredor' => [
-                    'id' => 15,
-                    'nome' => 'Luizo',
-                ],
-                'prova' => [
-                    'id' => 2,
-                    'data' => '2011-08-09',
-                    'distanciaEmKM' => 10,
-                ]
-            ],
-            [
-                'id' => 1,
-                'posicao' => 2,
-                'corredor' => [
-                    'id' => 14,
-                    'nome' => 'Rica',
-                ],
-                'prova' => [
-                    'id' => 2,
-                    'data' => '2011-08-09',
-                    'distanciaEmKM' => 10,
-                ]
-            ],
-            [
-                'id' => 5,
-                'posicao' => 3,
-                'corredor' => [
-                    'id' => 16,
-                    'nome' => 'Rod',
-                ],
-                'prova' => [
-                    'id' => 2,
-                    'data' => '2011-08-09',
-                    'distanciaEmKM' => 10,
-                ]
-            ],
-        ];
-        yield '21km' => [
-            [
-                'id' => 10,
-                'posicao' => 1,
-                'corredor' => [
-                    'id' => 12,
-                    'nome' => 'Laurena',
-                ],
-                'prova' => [
-                    'id' => 1,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 21,
-                ]
-            ],
-            [
-                'id' => 11,
-                'posicao' => 2,
-                'corredor' => [
-                    'id' => 11,
-                    'nome' => 'Rafaela',
-                ],
-                'prova' => [
-                    'id' => 1,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 21,
-                ]
-            ],
-            [
-                'id' => 12,
-                'posicao' => 3,
-                'corredor' => [
-                    'id' => 13,
-                    'nome' => 'Eduardo',
-                ],
-                'prova' => [
-                    'id' => 1,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 21,
-                ]
-            ],
-        ];
-        yield '42km' => [
-            [
-                'id' => 13,
-                'posicao' => 1,
-                'corredor' => [
-                    'id' => 22,
-                    'nome' => 'Laureni',
-                ],
-                'prova' => [
-                    'id' => 3,
-                    'data' => '2012-08-09',
-                    'distanciaEmKM' => 42,
-                ]
-            ],
-            [
-                'id' => 14,
-                'posicao' => 2,
-                'corredor' => [
-                    'id' => 21,
-                    'nome' => 'Rafaeli',
-                ],
-                'prova' => [
-                    'id' => 3,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 42,
-                ]
-            ],
-            [
-                'id' => 15,
-                'posicao' => 3,
-                'corredor' => [
-                    'id' => 23,
-                    'nome' => 'Edi',
-                ],
-                'prova' => [
-                    'id' => 3,
-                    'data' => '2010-08-09',
-                    'distanciaEmKM' => 42,
-                ]
             ],
         ];
     }

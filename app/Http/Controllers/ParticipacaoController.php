@@ -224,10 +224,11 @@ class ParticipacaoController extends Controller
         };
 
         $classificacoes = DB::table('tiposProva')
-            ->select('id')
+            ->select('id', 'distanciaEmKM')
             ->get()
-            ->map(function($t) use ($classifica) {
-                return ClassificacaoResource::collection($classifica($t->id));
+            ->reduce(function($acc, $t) use ($classifica) {
+                $acc[$t->distanciaEmKM.'km'] = ClassificacaoResource::collection($classifica($t->id));
+                return $acc;
             });
 
         return [ 'data' => $classificacoes ];

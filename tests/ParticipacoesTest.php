@@ -37,6 +37,6 @@ class ParticipacoesTest extends TestCase
     {
         \Tests\ParticipacoesData\DeveListarClassificacoesPorTipoDeProva::seed();
         $this->get('/participacoes/classificacao-por-tipo')
-             ->seeJson($retorno);
+             ->seeJson([ 'data' => $retorno ]);
     }
 }
