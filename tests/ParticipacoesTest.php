@@ -27,4 +27,16 @@ class ParticipacoesTest extends TestCase
         $this->get('/participacoes/1/classificacao-por-idade')
              ->seeJson($retorno);
     }
+
+    /**
+     * @dataProvider \Tests\ParticipacoesData\DeveListarClassificacoesPorTipoDeProva::data
+     * @group http
+     * @group db
+     */
+    public function testDeveListarClassificacoesPorTipoDeProva($retorno)
+    {
+        \Tests\ParticipacoesData\DeveListarClassificacoesPorTipoDeProva::seed();
+        $this->get('/participacoes/classificacao-por-tipo')
+             ->seeJson($retorno);
+    }
 }

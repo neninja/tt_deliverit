@@ -40,7 +40,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
     - Nome do corredor
     - Posição
 
-- [ ] Listagem de classificação das provas gerais
+- [x] Listagem de classificação das provas gerais
     - ID da prova
     - Tipo de prova
     - ID do corredor
@@ -62,5 +62,5 @@ Utilização das seguintes tecnologias será considerada um diferencial:
     - 45 – 55 anos
     - Acima de 55 anos
     > Por exemplo, as colocações de 18 -25 na prova de 3km apresentarão os 1º, 2º, 3º, ..., nesta faixa de idade, o mesmo para as outras faixas e tipos de provas.
-- [ ] A listagem de classificações gerais deve ser separada por tipos de provas.
+- [x] A listagem de classificações gerais deve ser separada por tipos de provas.
 

@@ -21,3 +21,7 @@ $router->get(
     'participacoes/{idProva}/classificacao-por-idade',
     'ParticipacaoController@classificacaoPorIdade'
 );
+$router->get(
+    'participacoes/classificacao-por-tipo',
+    'ParticipacaoController@classificacaoPorTipo'
+);
