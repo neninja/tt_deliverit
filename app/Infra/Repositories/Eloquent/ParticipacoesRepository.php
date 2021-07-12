@@ -7,18 +7,16 @@ use App\Models\Participacao as M;
 
 class ParticipacoesRepository implements \Core\Contracts\Repositories\IParticipacoesRepository
 {
-    public static function e2m(Participacao $e)
+    public static function e2m(Participacao $e, $m = null)
     {
-        $m = new M();
-        if(!is_null($e->id)){
-            $m->id = $e->id;
-        }
+        $m = is_null($m) ? new M() : $m;
+
         $m->id_corredor = $e->corredor->id;
         $m->id_prova = $e->prova->id;
         $m->horarioInicio = is_null($e->horarioInicio)
-            ? null : $e->horarioInicio->format('H:i');
+            ? null : $e->horarioInicio->format('H:i:s');
         $m->horarioFim = is_null($e->horarioInicio)
-            ? null : $e->horarioFim->format('H:i');
+            ? null : $e->horarioFim->format('H:i:s');
         return $m;
     }
 
@@ -35,18 +33,22 @@ class ParticipacoesRepository implements \Core\Contracts\Repositories\IParticipa
         );
 
         if(!is_null($m->horarioInicio)){
-            $e->horarioInicio = date_create_from_format('H:i', $m->horarioInicio);
+            $e->horarioInicio = date_create_from_format('H:i:s', $m->horarioInicio);
         }
 
         if(!is_null($m->horarioFim)){
-            $e->horarioFim = date_create_from_format('H:i', $m->horarioFim);
+            $e->horarioFim = date_create_from_format('H:i:s', $m->horarioFim);
         }
         return $e;
     }
 
     public function save(Participacao $e): Participacao
     {
-        $m = self::e2m($e);
+        $m = null;
+        if(!is_null($e->id)){
+            $m = M::find($e->id);
+        }
+        $m = self::e2m($e, $m);
         $m->save();
         $e->id = $m->id;
         return $e;
@@ -66,10 +68,13 @@ class ParticipacoesRepository implements \Core\Contracts\Repositories\IParticipa
         return self::m2e($m);
     }
 
-    public function possuiParticipacaoNoDia(\DateTime $dia): bool
+    public function possuiParticipacaoNoDia(int $corredor, \DateTime $dia): bool
     {
-        $participacoes = M::whereHas('prova', function ($query) use ($dia) {
-            return $query->whereDate('data', '=', $dia->format('Y-m-d'));
+        $participacoes = M::whereHas('prova', function ($query) use ($corredor, $dia) {
+            $query->whereDate('data', '=', $dia->format('Y-m-d'));
+            $query->where('id_corredor', '=', $corredor);
+
+            return $query;
         })->get();
 
         return $participacoes->count() > 0;

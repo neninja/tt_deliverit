@@ -46,7 +46,7 @@ class InscricaoProvaUC
 
         $diaJaOcupado = $this
             ->participacoesRepo
-            ->possuiParticipacaoNoDia($prova->data);
+            ->possuiParticipacaoNoDia($corredor->id, $prova->data);
 
         if($diaJaOcupado) {
             throw new UseCaseException(
