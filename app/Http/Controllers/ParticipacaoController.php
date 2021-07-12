@@ -187,42 +187,12 @@ class ParticipacaoController extends Controller
     public function classificacaoPorIdade()
     {
         $classifica = function(int $idadeMin, int $idadeMax) {
-            return DB::table('participacoes')
-                ->join('corredores', 'corredores.id', '=', 'participacoes.id_corredor')
-                ->join('provas', 'provas.id', '=', 'participacoes.id_prova')
-                ->join('tiposProva', 'tiposProva.id', '=', 'provas.id_tipoProva')
-                ->select(
-                    'participacoes.id as id',
-                    'participacoes.id_prova',
-                    'participacoes.id_corredor',
-                    'corredores.nome',
-                    'corredores.dataNascimento',
-                    'provas.data',
-                    'tiposProva.distanciaEmKM',
-                    'participacoes.horarioInicio',
-                    'participacoes.horarioFim',
-                    'participacoes.horarioInicio as tempoDeProva',
-                )
-                ->whereDate('corredores.dataNascimento', '<=', date('Y-m-d', strtotime("-{$idadeMin} year")))
-                ->whereDate('corredores.dataNascimento', '>', date('Y-m-d', strtotime("-{$idadeMax} year")))
-                ->get()
-                ->map(function ($p) {
-                    $horarioInicioUnix = date_create_from_format('H:i:s', $p->horarioInicio)->format('U');
-                    $horarioFimUnix = date_create_from_format('H:i:s', $p->horarioFim)->format('U');
-                    $p->tempoDeProva = $horarioFimUnix - $horarioInicioUnix;
-                    $p->total = $horarioFimUnix - $horarioInicioUnix;
-                    return $p;
-                })
-                ->sortBy('tempoDeProva')
-                ->values()
-                ->unique('id_corredor')
-                ->values()
-                ->map(function ($p, $i) {
-                    $p->posicao = $i + 1;
-                    return $p;
-                })
-                ->values()
-                ->all();
+            return $this->classifica(function($qb) use ($idadeMin, $idadeMax) {
+                $qb
+                    ->whereDate('corredores.dataNascimento', '<=', date('Y-m-d', strtotime("-{$idadeMin} year")))
+                    ->whereDate('corredores.dataNascimento', '>', date('Y-m-d', strtotime("-{$idadeMax} year")));
+                return $qb;
+            });
         };
 
         return [
@@ -247,40 +217,10 @@ class ParticipacaoController extends Controller
     public function classificacaoPorTipo()
     {
         $classifica = function(int $idTipoProva) {
-            return DB::table('participacoes')
-                ->join('corredores', 'corredores.id', '=', 'participacoes.id_corredor')
-                ->join('provas', 'provas.id', '=', 'participacoes.id_prova')
-                ->join('tiposProva', 'tiposProva.id', '=', 'provas.id_tipoProva')
-                ->select(
-                    'participacoes.id as id',
-                    'participacoes.id_prova',
-                    'participacoes.id_corredor',
-                    'corredores.nome',
-                    'corredores.dataNascimento',
-                    'provas.data',
-                    'tiposProva.distanciaEmKM',
-                    'participacoes.horarioInicio',
-                    'participacoes.horarioFim',
-                    'participacoes.horarioInicio as tempoDeProva',
-                )
-                ->where('tiposProva.id', '=', $idTipoProva)
-                ->get()
-                ->map(function ($p) {
-                    $horarioInicioUnix = date_create_from_format('H:i:s', $p->horarioInicio)->format('U');
-                    $horarioFimUnix = date_create_from_format('H:i:s', $p->horarioFim)->format('U');
-                    $p->tempoDeProva = $horarioFimUnix - $horarioInicioUnix;
-                    $p->total = $horarioFimUnix - $horarioInicioUnix;
-                    return $p;
-                })
-                ->sortBy('tempoDeProva')
-                ->values()
-                ->map(function ($p, $i) {
-                    $p->posicao = $i + 1;
-                    return $p;
-                })
-                ->all()
-            ;
-
+            return $this->classifica(function($qb) use ($idTipoProva) {
+                $qb->where('tiposProva.id', '=', $idTipoProva);
+                return $qb;
+            });
         };
 
         $classificacoes = DB::table('tiposProva')
@@ -291,6 +231,47 @@ class ParticipacaoController extends Controller
             });
 
         return [ 'data' => $classificacoes ];
+    }
+
+    private function classifica(callable $complemento) {
+        $qb = DB::table('participacoes')
+            ->join('corredores', 'corredores.id', '=', 'participacoes.id_corredor')
+            ->join('provas', 'provas.id', '=', 'participacoes.id_prova')
+            ->join('tiposProva', 'tiposProva.id', '=', 'provas.id_tipoProva')
+            ->select(
+                'participacoes.id as id',
+                'participacoes.id_prova',
+                'participacoes.id_corredor',
+                'corredores.nome',
+                'corredores.dataNascimento',
+                'provas.data',
+                'tiposProva.distanciaEmKM',
+                'participacoes.horarioInicio',
+                'participacoes.horarioFim',
+                'participacoes.horarioInicio as tempoDeProva',
+            );
+
+        $qb = $complemento($qb);
+
+        return $qb
+            ->get()
+            ->map(function ($p) {
+                $horarioInicioUnix = date_create_from_format('H:i:s', $p->horarioInicio)->format('U');
+                $horarioFimUnix = date_create_from_format('H:i:s', $p->horarioFim)->format('U');
+                $p->tempoDeProva = $horarioFimUnix - $horarioInicioUnix;
+                $p->total = $horarioFimUnix - $horarioInicioUnix;
+                return $p;
+            })
+            ->sortBy('tempoDeProva')
+            ->values()
+            ->unique('id_corredor')
+            ->values()
+            ->map(function ($p, $i) {
+                $p->posicao = $i + 1;
+                return $p;
+            })
+            ->values()
+            ->all();
     }
 }
 
