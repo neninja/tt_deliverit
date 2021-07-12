@@ -32,7 +32,7 @@ Utilização das seguintes tecnologias será considerada um diferencial:
     - ID da prova
     - Horário de início da prova
     - Horário de conclusão da prova
-- [ ] Listagem de classificação das provas por idade
+- [x] Listagem de classificação das provas por idade
     - ID da prova
     - Tipo de prova
     - ID do corredor
@@ -54,8 +54,8 @@ Utilização das seguintes tecnologias será considerada um diferencial:
 - [x] Não é permitido cadastrar o mesmo corredor em duas provas diferentes na mesma data.
     > Por exemplo, o corredor Barry Allen não pode estar cadastrado nas provas de 21km e 42km no dia 05/10/2019.
 - [x] Não é permitida a inscrição de menores de idade.
-- [ ] As classificações são definidas pelo menor tempo de prova.
-- [ ] A listagem de classificações por idade deve apresentar as posições dos candidatos dentro dos seguintes grupos em cada tipo de prova:
+- [x] As classificações são definidas pelo menor tempo de prova.
+- [x] A listagem de classificações por idade deve apresentar as posições dos candidatos dentro dos seguintes grupos em cada tipo de prova:
     - 18 – 25 anos
     - 25 – 35 anos
     - 35 – 45 anos

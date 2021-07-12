@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
             'message' => "Erro interno",
         ];
 
-        if (App::environment('local')) {
+        if (App::environment('local') || App::environment('testing')) {
             $response['message'] = $e->getMessage();
             $response['file'] = $e->getFile();
             $response['line'] = $e->getLine();

@@ -17,3 +17,7 @@ $router->post('provas', 'ProvaController@store');
 $router->get('participacoes', 'ParticipacaoController@index');
 $router->post('participacoes', 'ParticipacaoController@store');
 $router->put('participacoes', 'ParticipacaoController@update'); // chave composta
+$router->get(
+    'participacoes/{idProva}/classificacao-por-idade',
+    'ParticipacaoController@classificacaoPorIdade'
+);

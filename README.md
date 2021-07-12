@@ -24,4 +24,7 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
     - Acesse o container ``docker exec -it app bash``
     - Execute os testes ``composer test``
         > `composer test:filter <filtro>` filtra testes
+
 - Para ci ``docker-compose exec app composer ci``
+
+> Testes que contenham `@group db` resetarão as migrations, portanto caso queira fazer testes manuais após o phpunit utilize ``docker-compose exec app php artisan migrate --seed``

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
-use App\Http\Resources\ParticipacaoResource;
+use App\Models\Participacao;
+use App\Http\Resources\{
+    ParticipacaoResource,
+    ClassificacaoResource,
+};
 use Core\UseCases\{
     InscricaoProva\InscricaoProvaUC,
     InscricaoProva\InscricaoProvaDTO,
@@ -167,6 +171,73 @@ class ParticipacaoController extends Controller
         $participacao = $this->cadastroResultadoUC->execute($dto);
 
         return new ParticipacaoResource($participacao);
+    }
+
+    /**
+     * @OA\Get(
+     *     tags={"classificação"},
+     *     path="/participacoes/{prova}/classificacao-por-idade",
+     *     description="Classificação por grupos de idade",
+     *     @OA\Parameter(
+     *         description="Id da prova",
+     *         in="path",
+     *         name="prova",
+     *         required=false,
+     *         @OA\Schema(type="int", example="1")
+     *     ),
+     *     @OA\Response(response="200", description="Classificação dividida por grupos de idades")
+     * )
+     */
+    public function classificacaoPorIdade(int $idProva)
+    {
+        $classifica = function(int $idadeMin, int $idadeMax) use ($idProva) {
+            return DB::table('participacoes')
+                ->join('corredores', 'corredores.id', '=', 'participacoes.id_corredor')
+                ->join('provas', 'provas.id', '=', 'participacoes.id_prova')
+                ->join('tiposProva', 'tiposProva.id', '=', 'provas.id_tipoProva')
+                ->select(
+                    'participacoes.id as id',
+                    'participacoes.id_prova',
+                    'participacoes.id_corredor',
+                    'corredores.nome',
+                    'corredores.dataNascimento',
+                    'provas.data',
+                    'tiposProva.distanciaEmKM',
+                    'participacoes.horarioInicio',
+                    'participacoes.horarioFim',
+                    'participacoes.horarioInicio as tempoDeProva',
+                )
+                ->where('participacoes.id_prova', '=', $idProva)
+                ->whereDate('corredores.dataNascimento', '<=', date('Y-m-d', strtotime("-{$idadeMin} year")))
+                ->whereDate('corredores.dataNascimento', '>', date('Y-m-d', strtotime("-{$idadeMax} year")))
+                ->get()
+                ->map(function ($p) {
+                    $horarioInicioUnix = date_create_from_format('H:i:s', $p->horarioInicio)->format('U');
+                    $horarioFimUnix = date_create_from_format('H:i:s', $p->horarioFim)->format('U');
+                    $p->tempoDeProva = $horarioFimUnix - $horarioInicioUnix;
+                    $p->total = $horarioFimUnix - $horarioInicioUnix;
+                    return $p;
+                })
+                ->sortBy('tempoDeProva')
+                ->values()
+                ->map(function ($p, $i) {
+                    $p->posicao = $i + 1;
+                    return $p;
+                })
+                ->all()
+            ;
+
+        };
+
+        return [
+            'data' => [
+                '18-25' => ClassificacaoResource::collection($classifica(18, 25)),
+                '25-35' => ClassificacaoResource::collection($classifica(25, 35)),
+                '35-45' => ClassificacaoResource::collection($classifica(35, 45)),
+                '45-55' => ClassificacaoResource::collection($classifica(45, 55)),
+                '55+' => ClassificacaoResource::collection($classifica(55, 200)),
+            ]
+        ];
     }
 }
 
