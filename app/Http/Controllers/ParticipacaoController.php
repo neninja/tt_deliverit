@@ -56,8 +56,8 @@ class ParticipacaoController extends Controller
     {
         $qtd = $req->qtd ?: 2;
         $page = $req->page ?: 1;
-        $corredor = $req->data ?: "";
-        $prova = $req->tipo ?: "";
+        $corredor = $req->corredor ?: "";
+        $prova = $req->prova ?: "";
 
         Paginator::currentPageResolver(function() use ($page){
             return $page;
