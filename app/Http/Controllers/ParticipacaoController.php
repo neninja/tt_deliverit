@@ -250,7 +250,9 @@ class ParticipacaoController extends Controller
                 'participacoes.horarioInicio',
                 'participacoes.horarioFim',
                 'participacoes.horarioInicio as tempoDeProva',
-            );
+            )
+            ->whereNotNull('participacoes.horarioInicio')
+            ->whereNotNull('participacoes.horarioInicio');
 
         $qb = $complemento($qb);
 
