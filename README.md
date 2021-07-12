@@ -8,13 +8,13 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 
 ## Setup
 
-- Duplique `.env.example` e renomeie para `.env`
-- Crie os containers ``docker-compose up -d --build``
+1. Duplique `.env.example` e renomeie para `.env`
+2. Crie os containers ``docker-compose up -d --build``
     > Você pode parar os containers com ``docker-compose down``
-- Baixe as dependências do composer ``docker-compose exec app composer install``
-- Crie as tabelas no banco ``docker-compose exec app php artisan migrate --seed``
+3. Baixe as dependências do composer ``docker-compose exec app composer install``
+4. Crie as tabelas no banco ``docker-compose exec app php artisan migrate --seed``
     > Você pode limpar as tabelas ``docker-compose exec app php artisan migrate:refresh --seed``
-- Crie a documentação de suporte ``docker-compose exec app composer swagger`` e a acesse em ``localhost:8080/public/swagger``
+5. Crie a documentação de suporte ``docker-compose exec app composer swagger`` e a acesse em ``localhost:8080/public/swagger``
 
 > `docker-compose exec app php artisan db:seed --class FakeSeeder` irá criar +3 corredores e +5 provas
 
