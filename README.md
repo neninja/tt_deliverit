@@ -45,6 +45,8 @@ docker-compose exec app composer swagger
 - Para testes durante o desenvolvimento
 ```sh
 docker-compose exec app bash # acessa o container
+```
+```sh
 composer test # executa testes dentro do container
 
 # Filtrar
