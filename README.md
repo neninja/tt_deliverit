@@ -21,7 +21,7 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 ## Teste
 
 - Para testes durante o desenvolvimento:
-    - Acesse o container ``docker exec -it app bash``
+    - Acesse o container ``docker-compose exec app bash``
     - Execute os testes ``composer test``
         > `composer test:filter <filtro>` filtra testes
 

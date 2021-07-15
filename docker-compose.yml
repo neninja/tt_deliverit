@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
   db:
-    container_name: db
     restart: always
     image: postgres
     environment:
@@ -17,7 +16,6 @@ services:
       - ./docker/psql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   app:
-    container_name: app
     build: docker/php
     volumes:
       - .:/var/www/html
