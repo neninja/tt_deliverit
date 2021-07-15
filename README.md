@@ -8,7 +8,7 @@ Teste do processo seletivo para a [Deliver It](http://deliverit.com.br/).
 
 ## Setup
 
-1. Duplique `.env.example` e renomeie para `.env`
+1. Duplique `.env.example` e renomeie para `.env` ``cp .env.example .env``
 2. Crie os containers ``docker-compose up -d --build``
     > Você pode parar os containers com ``docker-compose down``
 3. Baixe as dependências do composer ``docker-compose exec app composer install``
